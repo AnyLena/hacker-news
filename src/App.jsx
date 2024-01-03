@@ -1,35 +1,77 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [news, setNews] = useState([]);
+  const [searchItem, setSearchItem] = useState("");
+  const [url,setUrl] = useState('http://hn.algolia.com/api/v1/search?query=foo&tags=story');
+  const [isPending, setIsPending] = useState(true);
+  const [errorMessage,setErrorMessage] = useState(null)
+
+useEffect( () => {
+  setErrorMessage('')
+},[])
+
+  useEffect(() => {
+    fetch(url)
+      .then((res) => {
+        if (!res.ok) {
+          setErrorMessage('Could not fetch the data for that resource.');
+          throw Error('Could not fetch the data for that resource.');
+        }
+        return res.json()
+      })
+      .then((data) => {
+        setNews(data.hits);
+        setIsPending(false);
+      })
+      .catch((error) => setErrorMessage(error.message));
+  }, [url]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let link = `http://hn.algolia.com/api/v1/search?query=${searchItem}&tags=story`
+    setUrl(link);
+  };
+
+  const handlePrompt = (e) => {
+    setSearchItem(e.target.value);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+      <h1>Hacker News</h1>
+
+      <form>
+        <label htmlFor="search">Search Articles</label>
+        <input type="text" id="search" onChange={handlePrompt} />
+        <button type="submit" onClick={handleSubmit}>
+          Submit
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      </form>
+
+      { errorMessage && <div> {errorMessage} </div>}
+      { isPending && !errorMessage && <div>Loading News ...</div>}
+      { searchItem !== '' && news.length === 0 && <div>No Articles found for "{searchItem}". Please try another keyword.</div>}
+      
+      {news && news.map((post) => (
+        <>
+          <h2> {post.title} </h2>
+          <p>
+            Written by{" "}
+            <em>
+              {post.author} at {post.created_at}
+            </em>
+          </p>
+          <p>
+            <a href={post.url}>Read more</a>
+          </p>
+        </>
+      ))}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
