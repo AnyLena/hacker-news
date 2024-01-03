@@ -1,42 +1,87 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Rubik+Doodle+Shadow&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
   text-align: center;
+  font-family: Poppins;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+body {
+  background: rgb(114,169,198);
+  background: linear-gradient(81deg, rgba(90,190,230,1) 0%, rgba(20,130,190,1) 100%);
+  
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h1 {
+  font-family: 'Rubik Doodle Shadow';
+  font-size: 50px;
+  color: white;
+  margin-top: 50px;
+  padding: 20px 30px;
+  border: dashed 5px white;
+  display: inline-block;
+
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+form {
+  background-color: white;
+  margin: 40px auto;
+  padding: 20px 30px;
+  width: 300px;
+  border-radius: 15px;
 }
 
-.card {
-  padding: 2em;
+form button {
+  margin-left: 15px;
+  padding: 8px 15px;
+  background: rgb(114,169,198);
+  background: linear-gradient(81deg, rgba(90,190,230,1) 0%, rgba(20,130,190,1) 100%);
+  border: none;
+  font-weight: 600;
+  color: white;
+  width: 30%
 }
 
-.read-the-docs {
-  color: #888;
+form button:hover {
+  background: linear-gradient(81deg, rgb(64, 135, 163) 0%, rgb(13, 85, 124) 100%);
+}
+
+form button:active {
+  background: linear-gradient(81deg, rgba(90,190,230,1) 0%, rgba(20,130,190,1) 100%);
+}
+
+form input {
+  width: 60%;
+  height: 30px;
+  border: solid 1px rgba(20,130,190,1);
+}
+
+form label {
+  font-size: 20px;
+}
+
+.posts {
+  background-color: rgba(255, 255, 255, 0.7);
+  margin: 30px 10%;
+  padding: 30px;
+  border-radius: 15px;
+}
+.post__title {
+  margin-bottom: 10px
+
+}
+.post__link > a {
+  text-decoration: none;
+  color: rgba(20,130,190,1);
+  font-weight: 600;
+  transition-property: color,border;
+  transition-duration: 1s;
+}
+
+.post__link > a:hover {
+  border-bottom: 6px rgba(90,190,230,1) solid;
+  color: rgba(90,190,230,1);
+  font-weight: 600;
+  box-shadow: ;
 }
