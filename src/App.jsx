@@ -45,9 +45,8 @@ useEffect( () => {
       <h1>Hacker News</h1>
 
       <form>
-        <label htmlFor="search">Search Articles</label>
-        <input type="text" id="search" onChange={handlePrompt} />
-        <button type="submit" onClick={handleSubmit}>
+        <label htmlFor="search">Search Articles</label><br />
+        <input type="text" id="search" onChange={handlePrompt} /><button type="submit" onClick={handleSubmit}>
           Submit
         </button>
       </form>
@@ -57,18 +56,16 @@ useEffect( () => {
       { searchItem !== '' && news.length === 0 && <div>No Articles found for "{searchItem}". Please try another keyword.</div>}
       
       {news && news.map((post) => (
-        <>
-          <h2> {post.title} </h2>
-          <p>
-            Written by{" "}
-            <em>
-              {post.author} at {post.created_at}
+        <div className="posts">
+          <h2 className="post__title"> {post.title} </h2>
+          <p className="post__author">
+          <em>written by {post.author} at {post.created_at}
             </em>
           </p>
-          <p>
-            <a href={post.url}>Read more</a>
+          <p className="post__link">
+            <a href={post.url} target="_blank">Read more</a>
           </p>
-        </>
+        </div>
       ))}
     </>
   );
