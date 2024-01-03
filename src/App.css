@@ -83,5 +83,13 @@ form label {
   border-bottom: 6px rgba(90,190,230,1) solid;
   color: rgba(90,190,230,1);
   font-weight: 600;
-  box-shadow: ;
+}
+
+.pagination button {
+  margin-left: 15px;
+  padding: 8px 15px;
+  background: white;
+  border: none;
+  color: black;
+  width: 30%
 }
