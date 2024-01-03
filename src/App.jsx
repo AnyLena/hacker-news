@@ -70,7 +70,7 @@ function App() {
       <section className="pagination"> 
       
       { page !== 0 && <button onClick={handlePrevious}>{` < Previous Page`}</button> }
-      <button onClick={handleNext}>{`Next Page > `}</button>
+       Page {page +1 } <button onClick={handleNext}>{`Next Page > `}</button>
       
 
       </section>
@@ -82,6 +82,8 @@ function App() {
           No Articles found for "{searchItem}". Please try another keyword.
         </div>
       )}
+
+      <div className="postList">
 
       {news &&
         news.map((post) => {
@@ -107,6 +109,7 @@ function App() {
             </div>
           );
         })}
+        </div>
     </>
   );
 }
